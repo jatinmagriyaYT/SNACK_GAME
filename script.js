@@ -38,7 +38,7 @@ function render(){
     });
 }
 
-intervaliId = setInterval(()=>{
+intervalID = setInterval(()=>{
     let head = null
     if (direction === "left"){
         head = { x : snack[0].x , y : snack[0].y - 1}

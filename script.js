@@ -38,7 +38,7 @@ for (let row = 0; row < rows; row++) {
     }
 }
 
-
+// Render logic 
 function render() {
 
     let head = null
@@ -70,6 +70,18 @@ function render() {
         return;
     }
 
+    // Self collesion 
+    const selfCollesion = snake.some( segment => segment.x === head.x && segment.y === head.y )
+    if (selfCollesion){
+        clearInterval(intervalID)
+        clearInterval(timerIntervalID)
+        modal.style.display = "flex"
+        startGameModal.style.display = "none"
+        gameOverModal.style.display = "flex"
+        return;        
+    }
+
+
     //Food consume logic
     if (head.x == food.x && head.y == food.y) {
         blocks[`${food.x}-${food.y}`].classList.remove("food");
@@ -100,12 +112,18 @@ function render() {
     });
 }
 
-startButton.addEventListener("click", () => {
-    modal.style.display = "none"
+// Render timing logic 
+const renderInterval = () => {
     intervalID = setInterval(() => {
         render()
-    }, 200);
+    }, 600);
+}
 
+// Start button logic 
+
+startButton.addEventListener("click", () => {
+    modal.style.display = "none"
+    renderInterval();
     time();
 })
 
@@ -122,7 +140,7 @@ function time() {
         } else {
             sec += 1;
         }
-        timeElement = `${min}. : ${sec}`
+        timeElement = `${min} : ${sec}`
         t_Element.innerHTML = timeElement;
     }, 1000)
 }
@@ -145,29 +163,27 @@ function restartGame() {
     food = { x: Math.floor(Math.random() * rows), y: Math.floor(Math.random() * cols) }
     score = 0
     p_score.innerHTML = score
-
+    clearInterval(intervalID)
     clearInterval(timerIntervalID)
     timeElement = "00:00"
     t_Element.innerHTML = timeElement
 
-    intervalID = setInterval(() => {
-        render()
-    }, 200);
-
+    renderInterval();
+    time();
 }
 
 addEventListener("keydown", (event) => {
 
-    if (event.key === "ArrowUp") {
+    if (event.key === "ArrowUp" && direction !== "down") {
         direction = "up"
     }
-    else if (event.key === "ArrowDown") {
+    else if (event.key === "ArrowDown" && direction !== "up") {
         direction = "down"
     }
-    else if (event.key === "ArrowRight") {
+    else if (event.key === "ArrowRight" && direction !== "left") {
         direction = "right"
     }
-    else if (event.key === "ArrowLeft") {
+    else if (event.key === "ArrowLeft" && direction !== "right") {
         direction = "left"
     }
 })

@@ -40,7 +40,6 @@ for (let row = 0; row < rows; row++) {
 
 // Render logic 
 function render() {
-
     let head = null
 
     blocks[`${food.x}-${food.y}`].classList.add("food");
@@ -98,25 +97,35 @@ function render() {
             h_Score.innerHTML = highScore
         }
     }
-
+// clearing the snake extra color 
     snake.forEach(segment => {
-        blocks[`${segment.x}-${segment.y}`].classList.remove("fill")
+        const block = blocks[`${segment.x}-${segment.y}`]
+        block.classList.remove("fill")
+        block.classList.remove("head")
     });
 
     snake.unshift(head);
     snake.pop();
-
-
-    snake.forEach(segment => {
-        blocks[`${segment.x}-${segment.y}`].classList.add("fill")
+    
+// Adding the snake body and head color 
+    snake.forEach((segment,idx) => {
+        const block = blocks[`${segment.x}-${segment.y}`]
+        block.classList.add("fill")
+        if ( idx === 0 ){
+            block.classList.add("head")  // head decoration 
+        }
     });
-}
+
+    // snake.forEach(segment => {
+    //     blocks[`${segment.x}-${segment.y}`].classList.add("fill")
+    // });
+};
 
 // Render timing logic 
 const renderInterval = () => {
     intervalID = setInterval(() => {
         render()
-    }, 600);
+    }, 100);
 }
 
 // Start button logic 
@@ -155,6 +164,7 @@ function restartGame() {
     blocks[`${food.x}-${food.y}`].classList.remove("food")
     snake.forEach(segment => {
         blocks[`${segment.x}-${segment.y}`].classList.remove("fill")
+        blocks[`${segment.x}-${segment.y}`].classList.remove("head")
     })
 
     modal.style.display = "none"

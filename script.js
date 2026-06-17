@@ -70,14 +70,14 @@ function render() {
     }
 
     // Self collesion 
-    const selfCollesion = snake.some( segment => segment.x === head.x && segment.y === head.y )
-    if (selfCollesion){
+    const selfCollesion = snake.some(segment => segment.x === head.x && segment.y === head.y)
+    if (selfCollesion) {
         clearInterval(intervalID)
         clearInterval(timerIntervalID)
         modal.style.display = "flex"
         startGameModal.style.display = "none"
         gameOverModal.style.display = "flex"
-        return;        
+        return;
     }
 
 
@@ -91,13 +91,21 @@ function render() {
         score += 1;
         p_score.innerHTML = score
 
+        snake.forEach(segment => {
+            const foodBlock = blocks[`${food.x}-${food.y}`]
+            const snakeBlock = blocks[`${segment.x}-${segment.y}`]
+            if (foodBlock === snakeBlock) {
+                blocks[`${food.x}-${food.y}`].classList.remove("food");
+            }
+        })
+        
         if (score > highScore) {
             highScore = score
             localStorage.setItem("highScore", highScore.toString());
             h_Score.innerHTML = highScore
         }
     }
-// clearing the snake extra color 
+    // clearing the snake extra color 
     snake.forEach(segment => {
         const block = blocks[`${segment.x}-${segment.y}`]
         block.classList.remove("fill")
@@ -106,12 +114,12 @@ function render() {
 
     snake.unshift(head);
     snake.pop();
-    
-// Adding the snake body and head color 
-    snake.forEach((segment,idx) => {
+
+    // Adding the snake body and head color 
+    snake.forEach((segment, idx) => {
         const block = blocks[`${segment.x}-${segment.y}`]
         block.classList.add("fill")
-        if ( idx === 0 ){
+        if (idx === 0) {
             block.classList.add("head")  // head decoration 
         }
     });
@@ -124,7 +132,7 @@ function render() {
 // Render timing logic 
 const renderInterval = () => {
     intervalID = setInterval(() => {
-        render()
+        render()    
     }, 100);
 }
 

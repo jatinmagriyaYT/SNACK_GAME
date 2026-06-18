@@ -15,7 +15,7 @@ body {
     --bg-primary-color:#121314;
     --bg-fill-color:#fdfdfc;
     --bg-food-color : #ff0000 ;
-    --bg-head-color : #008000 ;
+    --bg-head-color : #215900d3 ;
 
     /* TEXT COLORS*/
     --text-primary-color:#8c8c8c;
@@ -85,6 +85,36 @@ section .infos {
     transform: scale(1.1);
 }
 
+/* Button container for pause button */
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+/* Pause button styling */
+.btn-pause {
+    padding: var(--space-sm) var(--space-lg);
+    background-color: var(--bg-fill-color);
+    color: var(--bg-primary-color);
+    font-weight: bold;
+    font-size: 0.95rem;
+    border: 2px solid var(--bg-fill-color);
+    transition: all 0.3s ease;
+}
+
+.btn-pause:hover {
+    background-color: var(--bg-head-color);
+    border-color: var(--bg-head-color);
+    transform: scale(1.05);
+}
+
+.btn-pause:active {
+    transform: scale(0.95);
+}
+
 .board{
     flex-grow: 1;
     margin-top: var(--space-lg);
@@ -139,3 +169,21 @@ section .infos {
 .modal .game-over{
     display: none ;
 }
+
+    .button-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: var(--space-md);
+        margin-bottom: var(--space-md);
+    }
+
+    .btn-pause {
+        padding: var(--space-sm) var(--space-md);
+        background-color: var(--bg-fill-color);
+        color: var(--bg-primary-color);
+        font-weight: bold;
+        font-size: 0.8rem;
+        border: 2px solid var(--bg-fill-color);
+        min-width: 80px;
+    }

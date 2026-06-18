@@ -170,6 +170,35 @@ section .infos {
     display: none ;
 }
 
+/* Game over buttons container */
+.game-over-buttons {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Continue button styling */
+.btn-continue {
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--bg-head-color);
+    color: var(--bg-primary-color);
+    font-weight: bold;
+    border: 2px solid var(--bg-head-color);
+    transition: all 0.3s ease;
+}
+
+.btn-continue:hover {
+    background-color: var(--bg-food-color);
+    border-color: var(--bg-food-color);
+    transform: scale(1.05);
+}
+
+.btn-continue:active {
+    transform: scale(0.95);
+}
+
     .button-container {
         width: 100%;
         display: flex;
@@ -186,4 +215,22 @@ section .infos {
         font-size: 0.8rem;
         border: 2px solid var(--bg-fill-color);
         min-width: 80px;
+    }
+
+    .game-over-buttons {
+        display: flex;
+        gap: var(--space-sm);
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .btn-continue {
+        padding: var(--space-sm) var(--space-md);
+        background-color: var(--bg-head-color);
+        color: var(--bg-primary-color);
+        font-weight: bold;
+        font-size: 0.75rem;
+        border: 2px solid var(--bg-head-color);
+        min-width: 100px;
     }

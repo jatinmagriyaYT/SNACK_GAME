@@ -534,6 +534,8 @@ addEventListener("keydown", (event) => {
 function handleTouchStart(event) {
     touchStartX = event.changedTouches[0].screenX;
     touchStartY = event.changedTouches[0].screenY;
+    // Prevent default browser behavior (pull-to-refresh)
+    event.preventDefault();
 }
 
 // ============================================================
@@ -542,6 +544,8 @@ function handleTouchStart(event) {
 function handleTouchEnd(event) {
     touchEndX = event.changedTouches[0].screenX;
     touchEndY = event.changedTouches[0].screenY;
+    // Prevent default browser behavior
+    event.preventDefault();
     
     handleSwipe();
 }
